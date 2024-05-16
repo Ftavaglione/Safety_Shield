@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d84315</color>
+    <color name="colorPrimaryDark">#bf360c</color>
+    <color name="colorAccent">#ff6e40</color>
+    <color name="light_gray">#CCCCCC</color>
+    <color name="battery_75">#FFDB58</color>
+    <color name="battery_50">#FFA500</color>
+    <color name="battery_low">#FF0000</color>
+    <color name="battery_full">#99CC00</color>>
+
+    <color name="colorRecieveText">#00FF00</color>
+    <color name="colorSendText">#82CAFF</color>
+    <color name="colorStatusText">#FFDB58</color>
+</resources>
