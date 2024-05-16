@@ -294,7 +294,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         btnLivelloAlto.setOnClickListener((v -> send("pericolo_alto")));
 
         btnFunzionalita.setOnClickListener((v) -> {
-            send("check_funzionamento");
+            send("check_stato");
 
             feedback_4_animation.setAnimation(R.raw.loadinganimation);
 
@@ -725,15 +725,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                             //showDialog("braccialeIndex", "index:" + braccialeIndexStr + " con status: " + braccialeStatus);
                             // Aggiorna l'immagine della batteria in base allo stato di carica
                             switch (braccialeIndex) {
-                                case 0:
+                                case 1:
                                     updateBraccialeIcon(status_1_animation, braccialeStatus);
                                     break;
 
-                                case 1:
+                                case 2:
                                     updateBraccialeIcon(status_2_animation, braccialeStatus);
                                     break;
 
-                                case 2:
+                                case 3:
                                     updateBraccialeIcon(status_3_animation, braccialeStatus);
                                     break;
 
@@ -769,15 +769,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                             // showDialog("batteryIndex", "index:" + batteryIndexStr +" indexp: " + batteryIndexStr + " con level: " + batteryLevel + " con batterystatus:" + batteryStatus + " e statuses:" + batteryStatuses.toString() );
                             // Aggiorna l'immagine della batteria in base allo stato di carica
                             switch (batteryIndex) {
-                                case 0:
+                                case 1:
                                     updateBatteryCircle(bracciale1Circle, batteryLevel, bracciale1percentage);
                                     break;
 
-                                    case 1:
+                                    case 2:
                                         updateBatteryCircle(bracciale2Circle, batteryLevel, bracciale2percentage);
                                         break;
 
-                                        case 2:
+                                        case 3:
                                         updateBatteryCircle(bracciale3Circle, batteryLevel, bracciale3percentage);
                                         break;
 
@@ -843,19 +843,18 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         // Metodo per aggiornare l'immagine della batteria in base allo stato di carica
         private void updateBatteryCircle(ImageView imageView, double batteryLevel, TextView textView) {
-            // Assicurati che il livello di carica sia compreso tra 0 e 1
-            batteryLevel = Math.max(0, Math.min(1, batteryLevel));
+
 
             // Calcola il livello del ClipDrawable in base al livello di carica della batteria
             int clipLevel = (int) (batteryLevel * 10000); // Converti il livello di carica in un intervallo da 0 a 10000
 
             // Imposta il colore dello stroke in base alle soglie specificate
             int strokeColor;
-            if (batteryLevel >= 0.75) {
+            if (batteryLevel >= 75.00) {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_full); // Colore per il 75% e oltre
-            } else if (batteryLevel >= 0.50) {
+            } else if (batteryLevel >= 50.00) {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_75); // Colore per il 50% - 74%
-            } else if (batteryLevel >= 0.25) {
+            } else if (batteryLevel >= 25.00) {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_50); // Colore per il 25% - 49%
             } else {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_low); // Colore per meno del 25%
@@ -876,7 +875,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             imageView.setImageDrawable(batteryClipDrawable);
 
             // Aggiorna il testo con la percentuale di carica della batteria, includendo il simbolo percentuale
-            String batteryPercentage = String.format("%.0f%%", batteryLevel * 100);
+            String batteryPercentage = String.format("%.0f%%", batteryLevel);
             textView.setText(batteryPercentage);
         }
 
