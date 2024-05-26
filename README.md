@@ -10,7 +10,7 @@ This application serves as a user interface for visualizing and managing the sta
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot1.png)
+![Screenshot 1](screenshots/menu.png)
 ![Screenshot 2](screenshots/screenshot2.png)
 
 ## Getting Started

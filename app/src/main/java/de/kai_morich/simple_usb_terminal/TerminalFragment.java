@@ -572,12 +572,21 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }
         else if (lastLine.equals("pericolo basso ok")) {
             conditionMap.put(Condition.CHECK_CASO_1, true);
+
         }
         else if (lastLine.equals("pericolo medio ok")) {
             conditionMap.put(Condition.CHECK_CASO_2, true);
         }
         else if (lastLine.equals("pericolo alto ok")) {
             conditionMap.put(Condition.CHECK_CASO_3, true);
+        }
+
+        else if(lastLine.equals("pericolo basso")){
+            showDialog("Attenzione","Pericolo basso in corso!");
+        }else if(lastLine.equals("pericolo medio")){
+            showDialog("Attenzione","Pericolo medio in corso!");
+        }else if(lastLine.equals("pericolo alto")){
+            showDialog("Attenzione","Pericolo alto in corso!");
         }
 
         /*else if(lastLine.equals("check_funzionamento_ok")){
@@ -880,8 +889,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 Toast.makeText(getActivity(), "not connected", Toast.LENGTH_SHORT).show(); // Se non connesso, mostra un messaggio e riporta lo stato del pulsante
                 return;
             }
-            String ctrl = "";
-
         }
 
         // Metodo per avviare il controllo delle linee
