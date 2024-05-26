@@ -42,10 +42,10 @@
 
                 <!-- Row 1: Battery 1 -->
                 <TableRow
-                    android:id="@+id/row_cono_1"
+                    android:id="@+id/row_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="15dp">
 
                     <Button
                         android:id="@+id/btn_livello_basso"
@@ -67,14 +67,14 @@
 
                 <!-- Row 2: Battery 2 -->
                 <TableRow
-                    android:id="@+id/row_cono_2"
+                    android:id="@+id/row_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <Button
                         android:id="@+id/btn_livello_medio"
                         android:layout_width="0dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_vertical"
@@ -92,10 +92,10 @@
 
                 <!-- Row 3: Battery 3 -->
                 <TableRow
-                    android:id="@+id/row_cono_3"
+                    android:id="@+id/row_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp">
 
                     <Button
                         android:id="@+id/btn_livello_alto"
@@ -117,10 +117,10 @@
 
                 <!-- Row 4: Other Button -->
                 <TableRow
-                    android:id="@+id/row_cono_4"
+                    android:id="@+id/row_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp">
 
                     <Button
                         android:id="@+id/btn_funzionalità"
@@ -132,6 +132,31 @@
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/feedback4animation"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <Button
+                        android:id="@+id/btn_batteria"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="check batteria" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/feedback5animation"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="10dp"

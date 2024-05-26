@@ -295,30 +295,31 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         btnFunzionalita.setOnClickListener((v) -> {
             send("check_funzionamento");
-
             feedback_4_animation.setAnimation(R.raw.loadinganimation);
 
-        // Avvia un timer per controllare se ricevi l'acknoledgment entro 5 secondi
-        new android.os.Handler().postDelayed(() -> {
+            // Avvia un timer per controllare se ricevi l'acknoledgment entro 10 secondi
+            new android.os.Handler().postDelayed(() -> {
 
-                if (conditionMap.get(Condition.CHECK_FUNZIONAMENTO)) {
-                    feedback_4_animation.setAnimation(R.raw.checkanimation);
-                    new android.os.Handler().postDelayed(() -> {
-                        // Disattiva l'animazione dopo 3 secondi
-                        feedback_4_animation.setAnimation(R.raw.emptyanimation);
-                    }, 3000); // 3000 millisecondi = 3 secondi
-                }
+                    if (conditionMap.get(Condition.CHECK_FUNZIONAMENTO)) {
+                        feedback_4_animation.setAnimation(R.raw.checkanimation);
+                        new android.os.Handler().postDelayed(() -> {
+                            // Disattiva l'animazione dopo 3 secondi
+                            feedback_4_animation.setAnimation(R.raw.emptyanimation);
+                        }, 3000); // 3000 millisecondi = 3 secondi
+                    }
 
-                else {
-                    feedback_4_animation.setAnimation(R.raw.erroranimation);
-                    new android.os.Handler().postDelayed(() -> {
-                        // Disattiva l'animazione dopo 3 secondi
-                        feedback_4_animation.setAnimation(R.raw.emptyanimation);
-                    }, 3000); // 3000 millisecondi = 3 secondi
-                }
+                    else {
+                        feedback_4_animation.setAnimation(R.raw.erroranimation);
+                        new android.os.Handler().postDelayed(() -> {
+                            // Disattiva l'animazione dopo 3 secondi
+                            feedback_4_animation.setAnimation(R.raw.emptyanimation);
+                        }, 3000); // 3000 millisecondi = 3 secondi
+                    }
 
-        }, 5000); // 5000 millisecondi = 5 secondi
-    });
+            }, 10000); // 10 secondi
+        });
+
+
 
         Switch transparencySwitch = view.findViewById(R.id.switchreceiveText);
         LinearLayout sendTextLayout = view.findViewById(R.id.sendTextLayout);
@@ -530,40 +531,38 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     }
 
     private void receive(ArrayDeque<byte[]> datas) {
-            SpannableStringBuilder spn = new SpannableStringBuilder();
-            for (byte[] data : datas) {
-                if (hexEnabled) {
-                    spn.append(TextUtil.toHexString(data)).append('\n'); // Se la modalità esadecimale è abilitata, visualizza i dati esadecimali
-                } else {
-                    String msg = new String(data);
+        SpannableStringBuilder spn = new SpannableStringBuilder();
+        for (byte[] data : datas) {
+            if (hexEnabled) {
+                spn.append(TextUtil.toHexString(data)).append('\n'); // Se la modalità esadecimale è abilitata, visualizza i dati esadecimali
+            } else {
+                String msg = new String(data);
 
-                    if (newline.equals(TextUtil.newline_crlf) && msg.length() > 0) {
-                        // Se il newline è CRLF, si effettuano delle modifiche per la visualizzazione
-                        msg = msg.replace(TextUtil.newline_crlf, TextUtil.newline_lf);
-                        if (pendingNewline && msg.charAt(0) == '\n') {
-                            if (spn.length() >= 2) {
-                                spn.delete(spn.length() - 2, spn.length());
-                            } else {
-                                Editable edt = receiveText.getEditableText();
-                                if (edt != null && edt.length() >= 2)
-                                    edt.delete(edt.length() - 2, edt.length());
-                            }
+                if (newline.equals(TextUtil.newline_crlf) && msg.length() > 0) {
+                    // Se il newline è CRLF, si effettuano delle modifiche per la visualizzazione
+                    msg = msg.replace(TextUtil.newline_crlf, TextUtil.newline_lf);
+                    if (pendingNewline && msg.charAt(0) == '\n') {
+                        if (spn.length() >= 2) {
+                            spn.delete(spn.length() - 2, spn.length());
+                        } else {
+                            Editable edt = receiveText.getEditableText();
+                            if (edt != null && edt.length() >= 2)
+                                edt.delete(edt.length() - 2, edt.length());
                         }
-                        pendingNewline = msg.charAt(msg.length() - 1) == '\r';
                     }
-                    spn.append(TextUtil.toCaretString(msg, newline.length() != 0)); // Mostra il testo con newline
+                    pendingNewline = msg.charAt(msg.length() - 1) == '\r';
                 }
+                spn.append(TextUtil.toCaretString(msg, newline.length() != 0)); // Mostra il testo con newline
             }
-            receiveText.append(spn);
+        }
+        receiveText.append(spn);
             
 
         // Ottieni il testo completo dalla TextView
         String text = receiveText.getText().toString();
-
-// Dividi il testo in righe
+        // Dividi il testo in righe
         String[] lines = text.split("\\n"); // Usa "\\n" come delimitatore per dividere le righe
-
-// Estrai l'ultima riga
+        // Estrai l'ultima riga
         String lastLine = lines[lines.length - 1];
 
         if (lastLine.startsWith("BATT[") && lastLine.endsWith("]")) {
@@ -672,7 +671,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         private final Handler mainLooper;
         private final Runnable runnable;
         private final LinearLayout frame;
-        private final ToggleButton rtsBtn, ctsBtn, dtrBtn, dsrBtn, cdBtn, riBtn;
 
         // Dichiarazioni aggiuntive per gli ImageView delle batterie e i TextView
         private final ImageView bracciale1Circle;
@@ -688,14 +686,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             runnable = this::run;
 
             frame = view.findViewById(R.id.controlLines); // Ottiene il layout delle linee di controllo
-            rtsBtn = view.findViewById(R.id.controlLineRts); // Ottiene il pulsante RTS
-            ctsBtn = view.findViewById(R.id.controlLineCts); // Ottiene il pulsante CTS
-            dtrBtn = view.findViewById(R.id.controlLineDtr); // Ottiene il pulsante DTR
-            dsrBtn = view.findViewById(R.id.controlLineDsr); // Ottiene il pulsante DSR
-            cdBtn = view.findViewById(R.id.controlLineCd); // Ottiene il pulsante CD
-            riBtn = view.findViewById(R.id.controlLineRi); // Ottiene il pulsante RI
-            rtsBtn.setOnClickListener(this::toggle); // Imposta un listener per il pulsante RTS
-            dtrBtn.setOnClickListener(this::toggle); // Imposta un listener per il pulsante DTR
 
             // Inizializzazione degli ImageView delle batterie
 
@@ -725,15 +715,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                             //showDialog("braccialeIndex", "index:" + braccialeIndexStr + " con status: " + braccialeStatus);
                             // Aggiorna l'immagine della batteria in base allo stato di carica
                             switch (braccialeIndex) {
-                                case 0:
+                                case 1:
                                     updateBraccialeIcon(status_1_animation, braccialeStatus);
                                     break;
 
-                                case 1:
+                                case 2:
                                     updateBraccialeIcon(status_2_animation, braccialeStatus);
                                     break;
 
-                                case 2:
+                                case 3:
                                     updateBraccialeIcon(status_3_animation, braccialeStatus);
                                     break;
 
@@ -743,7 +733,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         }
                         catch (Exception e) {
                             String stackTrace = Log.getStackTraceString(e);
-                            //showDialog("Error", "An error occurred with BatteryStatus: " + "\"" + batteryStatus +  "\"\n" + "and index: " + batteryIndexStr + " and value: " + parts[1] + "\n\nStack trace:\n" + stackTrace);
+                            showDialog("Error", "An error happened, here's a more detailed stacktrace:" + stackTrace);
                         }
                     }
                 }
@@ -752,7 +742,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }
 
         // Metodo per aggiornare le immagini delle batterie
-        void updateBatteryImages(String batteryStatus) {
+        void  updateBatteryImages(String batteryStatus) {
 
             if (batteryStatus != null && !batteryStatus.isEmpty() && batteryStatus.contains(", ")) {
                 String[] batteryStatuses = batteryStatus.split(", "); // Dividi il testo in batterie separate
@@ -769,15 +759,15 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                             // showDialog("batteryIndex", "index:" + batteryIndexStr +" indexp: " + batteryIndexStr + " con level: " + batteryLevel + " con batterystatus:" + batteryStatus + " e statuses:" + batteryStatuses.toString() );
                             // Aggiorna l'immagine della batteria in base allo stato di carica
                             switch (batteryIndex) {
-                                case 0:
+                                case 1:
                                     updateBatteryCircle(bracciale1Circle, batteryLevel, bracciale1percentage);
                                     break;
 
-                                    case 1:
+                                    case 2:
                                         updateBatteryCircle(bracciale2Circle, batteryLevel, bracciale2percentage);
                                         break;
 
-                                        case 2:
+                                        case 3:
                                         updateBatteryCircle(bracciale3Circle, batteryLevel, bracciale3percentage);
                                         break;
 
@@ -787,7 +777,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         }
                         catch (Exception e) {
                             String stackTrace = Log.getStackTraceString(e);
-                            //showDialog("Error", "An error occurred with BatteryStatus: " + "\"" + batteryStatus +  "\"\n" + "and index: " + batteryIndexStr + " and value: " + parts[1] + "\n\nStack trace:\n" + stackTrace);
+                            showDialog("Error", "An error occurred with BatteryStatus: " + "\"" + batteryStatus +  "\"\n" + "and index: " + batteryIndexStr + " and value: " + parts[1] + "\n\nStack trace:\n" + stackTrace);
                         }
                     }
                 }
@@ -891,12 +881,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                 return;
             }
             String ctrl = "";
-            try {
-                if (btn.equals(rtsBtn)) { ctrl = "RTS"; usbSerialPort.setRTS(btn.isChecked()); } // Imposta RTS
-                if (btn.equals(dtrBtn)) { ctrl = "DTR"; usbSerialPort.setDTR(btn.isChecked()); } // Imposta DTR
-            } catch (IOException e) {
-                status("set" + ctrl + " failed: " + e.getMessage()); // Notifica l'errore nell'impostare le linee di controllo
-            }
+
         }
 
         // Metodo per avviare il controllo delle linee
@@ -914,17 +899,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         // Metodo per aggiornare lo stato delle linee di controllo
         private void run() {
             if(connected != Connected.True) return;
-            try {
-                EnumSet<UsbSerialPort.ControlLine> controlLines = usbSerialPort.getControlLines(); // Ottiene lo stato delle linee di controllo
-                rtsBtn.setChecked(controlLines.contains(UsbSerialPort.ControlLine.RTS)); // Imposta lo stato del pulsante RTS
-                ctsBtn.setChecked(controlLines.contains(UsbSerialPort.ControlLine.CTS)); // Imposta lo stato del pulsante CTS
-                dtrBtn.setChecked(controlLines.contains(UsbSerialPort.ControlLine.DTR)); // Imposta lo stato del pulsante DTR
-                dsrBtn.setChecked(controlLines.contains(UsbSerialPort.ControlLine.DSR)); // Imposta lo stato del pulsante DSR
-                cdBtn.setChecked(controlLines.contains(UsbSerialPort.ControlLine.CD)); // Imposta lo stato del pulsante CD
-                riBtn.setChecked(controlLines.contains(UsbSerialPort.ControlLine.RI)); // Imposta lo stato del pulsante RI
-            } catch (IOException e) {
-                status("getControlLines() failed: " + e.getMessage()); // Notifica l'errore nell'ottenere lo stato delle linee di controllo
-            }
+
             mainLooper.postDelayed(runnable, refreshInterval); // Riavvia il task di aggiornamento
         }
     }
