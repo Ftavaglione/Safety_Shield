@@ -141,34 +141,34 @@
 
                 </TableRow>
 
-                <TableRow
-                    android:id="@+id/row_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+        <TableRow
+            android:id="@+id/row_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
-                    <Button
-                        android:id="@+id/btn_batteria"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
-                        android:text="check batteria" />
+            <Button
+                android:id="@+id/btn_batteria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="check batteria" />
 
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/feedback5animation"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_gravity="center_vertical"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/feedback5animation"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
 
-                </TableRow>
-            </TableLayout>
-        </ScrollView>
+        </TableRow>
+    </TableLayout>
+</ScrollView>
 
-        <!-- Seconda tabella -->
+<!-- Seconda tabella -->
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

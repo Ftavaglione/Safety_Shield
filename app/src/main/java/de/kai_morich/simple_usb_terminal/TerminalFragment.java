@@ -10,15 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
@@ -40,7 +33,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -61,11 +53,9 @@ import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 
-import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.EnumSet;
 
 public class TerminalFragment extends Fragment implements ServiceConnection, SerialListener {
 
@@ -76,7 +66,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         CHECK_CASO_1,
         CHECK_CASO_2,
         CHECK_CASO_3,
-        CHECK_FUNZIONAMENTO
+        CHECK_STATO
     }
 
     // Stati della connessione USB
@@ -108,7 +98,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
     private Button btnLivelloMedio;
     private Button btnLivelloAlto;
-    private Button btnFunzionalita;
+    private Button btnStato;
+    //private Button btnBatteria;
+
 
     private LottieAnimationView feedback_1_animation;
     private LottieAnimationView feedback_2_animation;
@@ -248,20 +240,18 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         btnLivelloBasso = view.findViewById(R.id.btn_livello_basso);
         btnLivelloMedio = view.findViewById(R.id.btn_livello_medio);
         btnLivelloAlto = view.findViewById(R.id.btn_livello_alto);
-        btnFunzionalita = view.findViewById(R.id.btn_funzionalità);
+        btnStato = view.findViewById(R.id.btn_funzionalità);
+        //btnBatteria = view.findViewById(R.id.btn_batteria);
 
         //inizializzazione viste per animazioni
         feedback_1_animation = view.findViewById(R.id.feedback1animation);
         feedback_2_animation = view.findViewById(R.id.feedback2animation);
         feedback_3_animation = view.findViewById(R.id.feedback3animation);
-        feedback_4_animation = (LottieAnimationView) view.findViewById(R.id.feedback4animation);
+        feedback_4_animation = view.findViewById(R.id.feedback4animation);
 
         status_1_animation = view.findViewById(R.id.status1animation);
         status_2_animation = view.findViewById(R.id.status2animation);
-        status_3_animation = (LottieAnimationView) view.findViewById(R.id.status3animation);
-
-
-
+        status_3_animation = view.findViewById(R.id.status3animation);
 
 
         // Inizializzazione della mappa delle condizioni
@@ -269,7 +259,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         conditionMap.put(Condition.CHECK_CASO_1, false);
         conditionMap.put(Condition.CHECK_CASO_2, false);
         conditionMap.put(Condition.CHECK_CASO_3, false);
-        conditionMap.put(Condition.CHECK_FUNZIONAMENTO, false);
+        conditionMap.put(Condition.CHECK_STATO, false);
 
         View sendBtn = view.findViewById(R.id.send_btn); // Ottiene il pulsante di invio
         sendBtn.setOnClickListener(v -> send(sendText.getText().toString())); // Imposta un listener per l'evento di clic
@@ -293,14 +283,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         btnLivelloAlto.setOnClickListener((v -> send("pericolo_alto")));
 
-        btnFunzionalita.setOnClickListener((v) -> {
-            send("check_funzionamento");
+        /*btnStato.setOnClickListener((v) -> {
+            send("check_stato");
             feedback_4_animation.setAnimation(R.raw.loadinganimation);
 
             // Avvia un timer per controllare se ricevi l'acknoledgment entro 10 secondi
             new android.os.Handler().postDelayed(() -> {
 
-                    if (conditionMap.get(Condition.CHECK_FUNZIONAMENTO)) {
+                    if (conditionMap.get(Condition.CHECK_STATO)) {
                         feedback_4_animation.setAnimation(R.raw.checkanimation);
                         new android.os.Handler().postDelayed(() -> {
                             // Disattiva l'animazione dopo 3 secondi
@@ -316,8 +306,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
                         }, 3000); // 3000 millisecondi = 3 secondi
                     }
 
-            }, 10000); // 10 secondi
-        });
+
+            }, 12000); // 12 secondi
+        });*/
+
+        btnStato.setOnClickListener((v -> send("check_batteria")));
 
 
 
@@ -595,11 +588,12 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }*/
 
         else if (lastLine.startsWith("CHECK[") && lastLine.endsWith("]")){
+
             String woprefixlastLine = lastLine.substring(6);
             String cleanedlastLine = woprefixlastLine.substring(0, woprefixlastLine.length() - 1);
 
             controlLines.updateBraccialiStatus(cleanedlastLine);
-            conditionMap.put(Condition.CHECK_FUNZIONAMENTO, true);
+           // conditionMap.put(Condition.CHECK_STATO, true);
         }
 
     }
@@ -709,12 +703,16 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }
 
         void updateBraccialiStatus(String braccialiStatus){
-            if (braccialiStatus != null && !braccialiStatus.isEmpty() && braccialiStatus.contains(", ")) {
-                String[] braccialiStatuses = braccialiStatus.split(", "); // Dividi il testo in batterie separate
+            if (braccialiStatus != null && !braccialiStatus.isEmpty()) {
+                String[] braccialiStatuses = braccialiStatus.split(","); // Dividi il testo in batterie separate
 
                 for (String status : braccialiStatuses) {
-                    String[] parts = status.split("-");
-                    if (parts.length == 2 && !parts[1].isEmpty()) {
+                    String[] parts = status.split(": ");
+
+                    //showDialog("eccomi", "index: " + parts[0] + " with value: " + parts[1] + " n.parts: " + parts.length);
+
+
+                    if (parts.length == 2) {
                         String braccialeIndexStr = parts[0].replaceAll("[\\D]", ""); // Estrai l'indice della batteria
 
                         try{
@@ -753,12 +751,12 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         // Metodo per aggiornare le immagini delle batterie
         void  updateBatteryImages(String batteryStatus) {
 
-            if (batteryStatus != null && !batteryStatus.isEmpty() && batteryStatus.contains(", ")) {
-                String[] batteryStatuses = batteryStatus.split(", "); // Dividi il testo in batterie separate
+            if (batteryStatus != null && !batteryStatus.isEmpty() && batteryStatus.contains(",")) {
+                String[] batteryStatuses = batteryStatus.split(","); // Dividi il testo in batterie separate
 
                 for (String status : batteryStatuses) {
-                    String[] parts = status.split("-");
-                    if (parts.length == 2 && !parts[1].isEmpty()) {
+                    String[] parts = status.split(": ");
+                    if (parts.length == 2 && !parts[1].equals("NO")) {
                         String batteryIndexStr = parts[0].replaceAll("[\\D]", ""); // Estrai l'indice della batteria
 
                         try{
@@ -842,19 +840,17 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         // Metodo per aggiornare l'immagine della batteria in base allo stato di carica
         private void updateBatteryCircle(ImageView imageView, double batteryLevel, TextView textView) {
-            // Assicurati che il livello di carica sia compreso tra 0 e 1
-            batteryLevel = Math.max(0, Math.min(1, batteryLevel));
 
             // Calcola il livello del ClipDrawable in base al livello di carica della batteria
-            int clipLevel = (int) (batteryLevel * 10000); // Converti il livello di carica in un intervallo da 0 a 10000
+            int clipLevel = (int) (batteryLevel * 100); // Converti il livello di carica in un intervallo da 0 a 100
 
             // Imposta il colore dello stroke in base alle soglie specificate
             int strokeColor;
-            if (batteryLevel >= 0.75) {
+            if (batteryLevel >= 75.0) {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_full); // Colore per il 75% e oltre
-            } else if (batteryLevel >= 0.50) {
+            } else if (batteryLevel >= 50.0) {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_75); // Colore per il 50% - 74%
-            } else if (batteryLevel >= 0.25) {
+            } else if (batteryLevel >= 25.0) {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_50); // Colore per il 25% - 49%
             } else {
                 strokeColor = ContextCompat.getColor(requireContext(), R.color.battery_low); // Colore per meno del 25%
@@ -875,7 +871,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             imageView.setImageDrawable(batteryClipDrawable);
 
             // Aggiorna il testo con la percentuale di carica della batteria, includendo il simbolo percentuale
-            String batteryPercentage = String.format("%.0f%%", batteryLevel * 100);
+            String batteryPercentage = String.format("%.0f%%", batteryLevel);
             textView.setText(batteryPercentage);
         }
 
