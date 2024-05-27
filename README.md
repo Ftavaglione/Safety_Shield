@@ -1,31 +1,53 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/83070da7805b4899820e285d2f7847b9)](https://www.codacy.com/manual/kai-morich/SimpleUsbTerminal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kai-morich/SimpleUsbTerminal&amp;utm_campaign=Badge_Grade)
+# Safety Shield - Android App
 
-# SimpleUsbTerminal
-
-This Android app provides a line-oriented terminal / console for devices with a serial / UART interface connected with a USB-to-serial-converter.
-
-It supports USB to serial converters based on
-- FTDI FT232, FT2232, ...
-- Prolific PL2303
-- Silabs CP2102, CP2105, ...
-- Qinheng CH340, CH341
-
-and devices implementing the USB CDC protocol like
-- Arduino using ATmega32U4
-- Digispark using V-USB software USB
-- BBC micro:bit using ARM mbed DAPLink firmware
+This application serves as a user interface for visualizing and managing the state of three intelligent bracelets, including their battery levels and availability. Additionally, the app allows for the simulation of various system scenarios.
 
 ## Features
 
-- permission handling on device connection
-- foreground service to buffer receive data while the app is rotating, in background, ...
+- **Real-time Visualization**: Monitor the current state of the intelligent bracelets, including battery status and availability.
+- **Simulation**: Simulate different system scenarios to test and visualize how the system behaves under various conditions.
+- **User-friendly Interface**: Easy-to-use interface designed for intuitive interaction with the CPS.
 
-## Credits
+## Screenshots
 
-The app uses the [usb-serial-for-android](https://github.com/mik3y/usb-serial-for-android) library.
+![Screenshot 1](screenshots/menu.png)
+![Screenshot 2](screenshots/screenshot2.png)
 
-## Motivation
+## Getting Started
 
-I got various requests asking for help with Android development or source code for my
-[Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal) app.
-Here you find a simplified version of my app.
+### Prerequisites
+
+- Android Studio 4.0 or later
+- Android device or emulator running Android 5.0 (Lollipop) or later
+- OTG cable to communicate with the Master device through Serial Port at 19600 Baudrate
+- Arduino device of your choice as Master device
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Ftavaglione/Safety_Shield.git
+   cd Safety_Shield
+   ```
+
+2. **Open the project in Android Studio**:
+    - Launch Android Studio.
+    - Click on `File > Open` and navigate to the directory where you cloned the repository.
+    - Select the project to open it.
+
+3. **Build and run the app**:
+    - Connect your Android device or start an emulator.
+    - Click on `Run > Run 'app'` or press `Shift + F10`.
+
+## Usage
+
+### Visualizing Bracelet States
+
+- Open the app on your Android device.
+- The main screen will display the current state of the three intelligent bracelets, showing their battery levels and availability status.
+
+### Simulating Scenarios
+
+- Navigate to the simulation section using the bottom navigation bar.
+- Select a scenario to simulate.
+- The app will update to reflect the new simulated state, allowing you to observe and analyze the system's behavior.
