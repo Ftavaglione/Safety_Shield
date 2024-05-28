@@ -99,13 +99,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     private Button btnLivelloMedio;
     private Button btnLivelloAlto;
     private Button btnStato;
-    //private Button btnBatteria;
+    private Button btnBatteria;
 
 
     private LottieAnimationView feedback_1_animation;
     private LottieAnimationView feedback_2_animation;
     private LottieAnimationView feedback_3_animation;
     private LottieAnimationView feedback_4_animation;
+    private LottieAnimationView feedback_5_animation;
 
     private LottieAnimationView status_1_animation;
     private LottieAnimationView status_2_animation;
@@ -241,13 +242,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         btnLivelloMedio = view.findViewById(R.id.btn_livello_medio);
         btnLivelloAlto = view.findViewById(R.id.btn_livello_alto);
         btnStato = view.findViewById(R.id.btn_funzionalità);
-        //btnBatteria = view.findViewById(R.id.btn_batteria);
+        btnBatteria = view.findViewById(R.id.btn_batteria);
 
         //inizializzazione viste per animazioni
         feedback_1_animation = view.findViewById(R.id.feedback1animation);
         feedback_2_animation = view.findViewById(R.id.feedback2animation);
         feedback_3_animation = view.findViewById(R.id.feedback3animation);
         feedback_4_animation = view.findViewById(R.id.feedback4animation);
+        feedback_5_animation = view.findViewById(R.id.feedback5animation);
 
         status_1_animation = view.findViewById(R.id.status1animation);
         status_2_animation = view.findViewById(R.id.status2animation);
@@ -283,7 +285,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         btnLivelloAlto.setOnClickListener((v -> send("pericolo_alto")));
 
-        /*btnStato.setOnClickListener((v) -> {
+        btnStato.setOnClickListener((v) -> {
             send("check_stato");
             feedback_4_animation.setAnimation(R.raw.loadinganimation);
 
@@ -308,9 +310,18 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
 
             }, 12000); // 12 secondi
-        });*/
+        });
 
-        btnStato.setOnClickListener((v -> send("check_batteria")));
+        btnBatteria.setOnClickListener((v) -> {
+            send("check_batteria");
+            feedback_5_animation.setAnimation(R.raw.loadinganimation);
+
+            // Avvia un timer per controllare se ricevi l'acknoledgment entro 10 secondi
+            new android.os.Handler().postDelayed(() -> {
+                feedback_5_animation.setAnimation(R.raw.emptyanimation);
+
+            }, 12000); // 12 secondi
+        });
 
 
 
@@ -574,11 +585,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             conditionMap.put(Condition.CHECK_CASO_3, true);
         }
 
-        else if(lastLine.equals("pericolo basso")){
+        else if(lastLine.equals("pericolo_basso")){
             showDialog("Attenzione","Pericolo basso in corso!");
-        }else if(lastLine.equals("pericolo medio")){
+        }else if(lastLine.equals("pericolo_medio")){
             showDialog("Attenzione","Pericolo medio in corso!");
-        }else if(lastLine.equals("pericolo alto")){
+        }else if(lastLine.equals("pericolo_alto")){
             showDialog("Attenzione","Pericolo alto in corso!");
         }
 

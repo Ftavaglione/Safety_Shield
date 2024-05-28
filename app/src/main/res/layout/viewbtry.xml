@@ -69,12 +69,12 @@
                 <TableRow
                     android:id="@+id/row_2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
 
                     <Button
                         android:id="@+id/btn_livello_medio"
                         android:layout_width="0dp"
-                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_vertical"
@@ -141,34 +141,34 @@
 
                 </TableRow>
 
-        <TableRow
-            android:id="@+id/row_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+                <TableRow
+                    android:id="@+id/row_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
 
-            <Button
-                android:id="@+id/btn_batteria"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:text="check batteria" />
+                    <Button
+                        android:id="@+id/btn_batteria"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="check batteria" />
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/feedback5animation"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="center_vertical"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"/>
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/feedback5animation"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
 
-        </TableRow>
-    </TableLayout>
-</ScrollView>
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
 
-<!-- Seconda tabella -->
+        <!-- Seconda tabella -->
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -202,36 +202,28 @@
             </TableRow>
 
             <!-- Row 1: Battery 1 -->
-
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal">
 
                 <!-- ImageView per il cerchio della batteria -->
-                <!-- RelativeLayout per contenere l'immagine del bracciale e i cerchi della batteria -->
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <!-- ImageView per il cerchio esterno -->
                     <ImageView
                         android:id="@+id/bracciale_1_circle_edge"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/battery_circle_edge" />
 
-                    <!-- ImageView per il cerchio interno -->
                     <ImageView
                         android:id="@+id/bracciale_1_circle"
                         android:layout_width="58dp"
                         android:layout_height="58dp"
                         android:layout_margin="1dp"
                         android:src="@drawable/battery_circle" />
-
-                    <!-- ImageView per l'immagine del bracciale -->
-
-                    <!-- TextView per la percentuale della batteria -->
 
                     <ImageView
                         android:id="@+id/bracciale_1_image"
@@ -264,7 +256,6 @@
 
                 </RelativeLayout>
 
-
                 <TextView
                     android:id="@+id/bracciale_1_name"
                     android:layout_width="wrap_content"
@@ -273,9 +264,7 @@
                     android:layout_marginTop="18dp"
                     android:text="Bracciale 1"
                     android:textSize="20sp" />
-
             </FrameLayout>
-
 
             <!-- Row 2: Battery 2 -->
             <FrameLayout
@@ -284,30 +273,22 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp">
 
-                <!-- ImageView per il cerchio della batteria -->
-                <!-- RelativeLayout per contenere l'immagine del bracciale e i cerchi della batteria -->
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <!-- ImageView per il cerchio esterno -->
                     <ImageView
                         android:id="@+id/bracciale_2_circle_edge"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/battery_circle_edge" />
 
-                    <!-- ImageView per il cerchio interno -->
                     <ImageView
                         android:id="@+id/bracciale_2_circle"
                         android:layout_width="58dp"
                         android:layout_height="58dp"
                         android:layout_margin="1dp"
                         android:src="@drawable/battery_circle" />
-
-                    <!-- ImageView per l'immagine del bracciale -->
-
-                    <!-- TextView per la percentuale della batteria -->
 
                     <ImageView
                         android:id="@+id/bracciale_2_image"
@@ -337,9 +318,7 @@
                         android:text="100%"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
                 </RelativeLayout>
-
 
                 <TextView
                     android:id="@+id/bracciale_2_name"
@@ -349,7 +328,6 @@
                     android:layout_marginTop="18dp"
                     android:text="Bracciale 2"
                     android:textSize="20sp" />
-
             </FrameLayout>
 
             <!-- Row 3: Battery 3 -->
@@ -359,30 +337,22 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp">
 
-                <!-- ImageView per il cerchio della batteria -->
-                <!-- RelativeLayout per contenere l'immagine del bracciale e i cerchi della batteria -->
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <!-- ImageView per il cerchio esterno -->
                     <ImageView
                         android:id="@+id/bracciale_3_circle_edge"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/battery_circle_edge" />
 
-                    <!-- ImageView per il cerchio interno -->
                     <ImageView
                         android:id="@+id/bracciale_3_circle"
                         android:layout_width="58dp"
                         android:layout_height="58dp"
                         android:layout_margin="1dp"
                         android:src="@drawable/battery_circle" />
-
-                    <!-- ImageView per l'immagine del bracciale -->
-
-                    <!-- TextView per la percentuale della batteria -->
 
                     <ImageView
                         android:id="@+id/bracciale_3_image"
@@ -412,9 +382,7 @@
                         android:text="100%"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
                 </RelativeLayout>
-
 
                 <TextView
                     android:id="@+id/bracciale_3_name"
@@ -424,9 +392,7 @@
                     android:layout_marginTop="18dp"
                     android:text="Bracciale 3"
                     android:textSize="20sp" />
-
             </FrameLayout>
         </TableLayout>
     </LinearLayout>
-
 </FrameLayout>
