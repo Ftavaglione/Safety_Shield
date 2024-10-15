@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Include viewbtry sopra il TextView, setta  android:visibility="gone" e android:layout_below="@id/viewbtry_container"  del LinearLayout per nasconderla  -->
+    <include
+        android:id="@+id/viewbtry_container"
+        layout="@layout/viewbtry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@id/viewbtry_container"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/controlLines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="6dp" />
+
+
+
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="6dp" />
+
+            <ToggleButton
+                android:id="@+id/controlLineCd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:minWidth="48sp"
+                android:textColor="@android:color/secondary_text_dark"
+                android:textOff="CD"
+                android:textOn="CD" />
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="?android:attr/listDivider"
+            android:layout_height="2dp" />
+
+        <TextView
+            android:id="@+id/receive_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:freezesText="true"
+            android:gravity="bottom"
+            android:scrollbars="vertical"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <Switch
+            android:id="@+id/switchreceiveText"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="mostra serial monitor"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:thumbTint="@color/light_gray"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <View
+            android:layout_width="match_parent"
+            android:background="?android:attr/listDivider"
+            android:layout_height="2dp" />
+
+        <LinearLayout
+            android:id="@+id/sendTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/send_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="text|textNoSuggestions"
+                android:singleLine="true" />
+
+            <ImageButton
+                android:id="@+id/send_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_send_white_24dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

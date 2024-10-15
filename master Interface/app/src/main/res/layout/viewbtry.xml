@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:id="@id/viewbtry_container"
+        android:layout_height="344dp"
+        android:layout_gravity="center|top"
+        android:orientation="horizontal">
+
+        <!-- Prima tabella -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:padding="12dp">
+
+                <!-- Row: Table Name and Image -->
+                <TableRow
+                    android:id="@+id/table_name_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/table_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Test scenari d'uso"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <!-- Row 1: Battery 1 -->
+                <TableRow
+                    android:id="@+id/row_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <Button
+                        android:id="@+id/btn_livello_basso"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="test livello basso" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/feedback1animation"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+                </TableRow>
+
+                <!-- Row 2: Battery 2 -->
+                <TableRow
+                    android:id="@+id/row_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <Button
+                        android:id="@+id/btn_livello_medio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="test livello medio" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/feedback2animation"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+                </TableRow>
+
+                <!-- Row 3: Battery 3 -->
+                <TableRow
+                    android:id="@+id/row_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <Button
+                        android:id="@+id/btn_livello_alto"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="test livello alto" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/feedback3animation"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+                </TableRow>
+
+                <!-- Row 4: Other Button -->
+                <TableRow
+                    android:id="@+id/row_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <Button
+                        android:id="@+id/btn_funzionalità"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="check bracciali" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/feedback4animation"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <Button
+                        android:id="@+id/btn_batteria"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:text="check batteria" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/feedback5animation"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+
+        <!-- Seconda tabella -->
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="12dp">
+
+            <!-- Row: Table Name and Image -->
+            <TableRow
+                android:id="@+id/table_name_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/table2_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Stato bracciali"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </TableRow>
+
+            <!-- Row 1: Battery 1 -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <!-- ImageView per il cerchio della batteria -->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/bracciale_1_circle_edge"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/battery_circle_edge" />
+
+                    <ImageView
+                        android:id="@+id/bracciale_1_circle"
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:layout_margin="1dp"
+                        android:src="@drawable/battery_circle" />
+
+                    <ImageView
+                        android:id="@+id/bracciale_1_image"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:elevation="1dp"
+                        android:src="@drawable/bracciale1" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/status1animation"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+
+                    <TextView
+                        android:id="@+id/bracciale_1_percentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/bracciale_1_circle_edge"
+                        android:layout_marginStart="10dp"
+                        android:text="100%"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/bracciale_1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="18dp"
+                    android:text="Bracciale 1"
+                    android:textSize="20sp" />
+            </FrameLayout>
+
+            <!-- Row 2: Battery 2 -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/bracciale_2_circle_edge"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/battery_circle_edge" />
+
+                    <ImageView
+                        android:id="@+id/bracciale_2_circle"
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:layout_margin="1dp"
+                        android:src="@drawable/battery_circle" />
+
+                    <ImageView
+                        android:id="@+id/bracciale_2_image"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:elevation="1dp"
+                        android:src="@drawable/bracciale2" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/status2animation"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+
+                    <TextView
+                        android:id="@+id/bracciale_2_percentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/bracciale_2_circle_edge"
+                        android:layout_marginStart="10dp"
+                        android:text="100%"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/bracciale_2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="18dp"
+                    android:text="Bracciale 2"
+                    android:textSize="20sp" />
+            </FrameLayout>
+
+            <!-- Row 3: Battery 3 -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/bracciale_3_circle_edge"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/battery_circle_edge" />
+
+                    <ImageView
+                        android:id="@+id/bracciale_3_circle"
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:layout_margin="1dp"
+                        android:src="@drawable/battery_circle" />
+
+                    <ImageView
+                        android:id="@+id/bracciale_3_image"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:elevation="1dp"
+                        android:src="@drawable/bracciale3" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/status3animation"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center_vertical"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"/>
+
+                    <TextView
+                        android:id="@+id/bracciale_3_percentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/bracciale_3_circle_edge"
+                        android:layout_marginStart="10dp"
+                        android:text="100%"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/bracciale_3_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="18dp"
+                    android:text="Bracciale 3"
+                    android:textSize="20sp" />
+            </FrameLayout>
+        </TableLayout>
+    </LinearLayout>
+</FrameLayout>
