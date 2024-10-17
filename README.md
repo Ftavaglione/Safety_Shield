@@ -1,3 +1,5 @@
+![Logo](logo.png)
+
 # Bracelets, Cones, and Master System
 
 This repository contains two key components: 
