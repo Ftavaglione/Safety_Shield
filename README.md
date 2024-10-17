@@ -1,6 +1,6 @@
 ![Logo](logo.png)
 
-# Bracelets, Cones, and Master System
+# Project Safety Shield
 
 This repository contains two key components: 
 1. **Arduino Firmware** for controlling intelligent bracelets, cones, and the master device.
